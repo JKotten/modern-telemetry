@@ -1,0 +1,443 @@
+﻿/*
+
+    Author:     Chainboost
+    Version:    1.0 - Modern Light
+
+*/
+
+
+/*===========================
+*               CSS CHAPTERS                *
+============================
+*       CH01 - Import
+*       CH02 - General
+*       CH03 - Dashboard
+*       CH04 - Job Info
+*       CH05 - Truck Status
+*       CH06 - Bottom Navigation
+*       CH07 - Dark Mode
+============================
+
+
+
+
+
+/*======================
+*           CH01 - Import           *
+======================*/
+
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,700');
+
+@import url('css/materialize.min.css');
+
+
+
+
+
+/*======================
+*           CH02 - General          *
+======================*/
+
+
+/*      BODY        */
+
+body {
+    font-family: 'Open Sans';
+    overflow: visible;
+    display: flex;
+    flex-flow: column;
+    height: 100%;    
+    font-weight: 700;
+}
+
+.dashboard {
+    background-color: #FFF;
+    z-index: 999;
+}
+
+
+/*      CONTAINER MAX WIDTH         */
+
+.container {
+    max-width: 480px;
+    width: 100%;
+}
+
+
+/*      MARGIN ROW      */
+
+.row {
+    margin-bottom: 0
+}
+
+
+/*      ICON FONT       */
+
+@font-face {
+    font-family: 'icomoon';
+    src:  url('font/icomoon.eot?7c7n0v');
+    src:  url('font/icomoon.eot?7c7n0v#iefix') format('embedded-opentype'),
+    url('font/icomoon.ttf?7c7n0v') format('truetype'),
+    url('font/icomoon.woff?7c7n0v') format('woff'),
+    url('font/icomoon.svg?7c7n0v#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+  /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-cruisecontrol:before {
+    content: "\e903";
+}
+
+.icon-gear:before {
+    content: "\e904";
+}
+
+.icon-sleep:before {
+    content: "\e905";
+}
+
+.icon-speedlimit:before {
+    content: "\e906";
+}
+
+.icon-tank:before {
+    content: "\e907";
+}
+
+.icon-dashboard:before {
+    content: "\e900";
+}
+
+.icon-job-info:before {
+    content: "\e901";
+}
+
+.icon-truck-status:before {
+    content: "\e902";
+}
+
+
+/*      FILL THE ICON       */
+
+.fillingIcon {
+    display: inline-block;
+    position: relative;
+}
+
+.fillingIcon > .top,
+.fillingIcon > .warning {
+    position: absolute;
+    overflow: hidden;
+}
+
+.fillingIcon > .top > *,
+.fillingIcon > .bot > *,
+.fillingIcon > .warning > * {
+    display: block;
+}
+
+
+
+
+
+/*=========================
+*           CH03 - Dashboard            *
+=========================*/
+
+@media (max-height: 650px) {
+    .flex-container {
+        display: inline !important;
+        height: 100% !important;
+    }
+    
+    .fillBox {
+        padding: 20px 0;    
+    }
+}
+
+.flex-container {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 64px);
+}
+
+.currentSpeed {
+    font-size: 2.5REM;
+    text-align: center;
+    height: 200px;
+    line-height: 200px;
+    text-transform: uppercase;
+    border-bottom-left-radius: 100% 50%;
+    border-bottom-right-radius: 100% 50%;
+    background: linear-gradient(#8DC26F, #76B852);
+}
+
+.red-gradient {
+    background: linear-gradient(#EF473A, #CB2D3E) !important;
+}
+
+.truck-speedRounded {
+    font-size: 6.667REM;
+}
+
+.digitalMeters {
+    border-bottom: 1px solid #E0E0E0;    
+}
+
+.digitalMeterBox {
+    position: relative;
+    z-index: -1;
+    height: 200px;
+    margin-top: -50px;
+    padding-top: 75px !important;
+    text-align: center;
+    font-size: 2REM;
+    border-right: 1px solid #E0E0E0;
+}
+
+.digitalMeterBox > img {
+    height: 48px;
+    width: auto;
+    display: block;
+    margin: 0 auto 5px auto;
+}
+
+.lastBorder {
+    border-right: 0;
+}
+
+.cruiseControlImage,
+.speedLimitImage {
+    border: 2px solid #212121;
+    border-radius: 50%;
+}
+
+.fillBox {
+    flex: 1;
+    align-items: center;
+    border-bottom: 1px solid #E0E0E0;
+}
+
+.fillBoxContent {
+    text-align: center;
+    line-height: inherit;
+    font-size: 1.5REM;
+}
+
+.fillBoxContent > img {
+    height: 60px;
+    width: auto;
+    display: block;
+    margin: 0 auto 15px auto;
+}
+
+#sleep {
+    border-bottom: 0;
+}
+
+
+
+
+
+/*======================
+*           CH04 - Job Info         *
+======================*/
+
+.noJob {
+    height: calc(100vh - 64px);
+    text-align: center;
+}
+
+.noJob-container {
+    text-align: center;
+    width: 100%;
+    font-size: 1.5REM;
+    text-transform: uppercase;
+    color: #E0E0E0;
+}
+
+.noJob-container > img {
+    display: block;
+    margin: 0 auto 20px auto;
+    height: 128px;
+}
+
+.hasJobHeader {
+    font-size: 2.5REM;
+    text-align: center;
+    color: #FFF;
+    height: 100px;
+    line-height: 100px;
+    text-transform: uppercase;
+    border-bottom-left-radius: 100% 50%;
+    border-bottom-right-radius: 100% 50%;
+    background: linear-gradient(#2F80ED, #56CCF2);
+}
+
+.BoxContainer {
+    flex: 1;
+    align-items: center;
+    border-bottom: 1px solid #E0E0E0;
+    padding: 20px 0;
+}
+
+.BoxHeader {
+    display: block;
+    text-align: center;
+    font-size: 2REM;
+    text-transform: uppercase;
+}
+
+.BoxHeader > img {
+    height: 24px;
+    margin: 0 10px;
+}
+
+.BoxContent {
+    text-align: center;
+    font-size: 1.5REM;
+    font-weight: 300;
+    margin-top: 10px;
+    text-transform: uppercase;
+}
+
+.etaLine {
+    display: block;
+}
+
+.lastBox {
+    border-bottom: 0;
+}
+
+
+
+
+
+/*=========================
+*           CH06 - Truck Status         *
+==========================*/
+
+.truckStatusHeader {
+    font-size: 2.5REM;
+    text-align: center;
+    color: #FFF;
+    height: 100px;
+    line-height: 100px;
+    text-transform: uppercase;
+    border-bottom-left-radius: 100% 50%;
+    border-bottom-right-radius: 100% 50%;
+    background: linear-gradient(#CB2D3E, #EF473A);
+}
+
+.damageIcon {
+    text-align: center;
+}
+
+
+
+
+
+
+
+
+/*================================
+*           CH06 - Bottom Navigation            *
+================================*/
+
+.tabs,
+.tabs .tab {
+    line-height: inherit;
+    height: auto;
+}
+
+.tabs .tab {
+    padding-top: 7px;
+    padding-bottom: 7px;
+}
+
+.tab > a > i {
+    display: block;
+    font-size: 1.6REM;
+    margin: 0 auto 5px auto;
+}
+
+.tabs .tab a {
+    color: #9E9E9E;
+}
+
+.tabs .tab a:hover,
+.tabs .tab a.active {
+    color: #212121;
+}
+
+.tabs .indicator {
+    height: 0;
+}
+
+
+
+
+
+/*=========================
+*           CH07 - Dark Mode            *
+=========================*/
+
+.dark {
+    background-color: #000 !important;
+    color: #FFF;
+    z-index: 999;
+}
+
+.dark > #dashboard > .flex-container > .digitalMeters > .container > .row > .digitalMeterBox > img,
+.dark > #dashboard > .flex-container > .fillBox > .fillBoxContent > img,
+.dark > #dashboard > .flex-container > .fillBox > .container > .row > .fillBoxContent > .fillingIcon > .top > svg,
+.dark > #job-info > .flex-container > .hasJob > .BoxContainer > .container > .row > .col > .BoxHeader > img,
+.dark > #truck-status > .flex-container > .BoxContainer > .container > .row > .col > .fillingIcon > .top > svg {
+    filter: invert(1);
+}
+
+.dark > #dashboard > .flex-container > .digitalMeters,
+.dark > #dashboard > .flex-container > .digitalMeters > .container > .row > .digitalMeterBox,
+.dark > #dashboard > .flex-container > .fillBox,
+.dark > #job-info > .flex-container > .hasJob > .BoxContainer,
+.dark > #truck-status > .flex-container > .BoxContainer {
+    border-color: #616161;
+}
+
+.dark > #dashboard > .flex-container > .currentSpeed,
+.dark > #job-info >  .flex-container > .hasJob > .hasJobHeader,
+.dark > #truck-status > .flex-container > .truckStatusHeader {
+    color: #000;
+}
+
+.dark > .bottom-nav,
+.dark > .bottom-nav > .container > .row > .tabs {
+    background-color: #1A1A1A;
+}
+
+.dark > .bottom-nav .tabs .tab a:hover, .dark > .bottom-nav .tabs .tab a.active {
+    color: #FFF;
+}
+
+
+
+
+
+
+
+
+

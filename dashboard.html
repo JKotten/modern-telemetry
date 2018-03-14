@@ -1,0 +1,307 @@
+﻿<script src="skins/modern-telemetry-km/js/materialize.min.js"></script>
+<svg style="display: none">
+    <defs>
+        
+        <symbol id="svg-ets2-truck" viewBox="0 0 54 36">
+            <path d="m14 31a2 2 0 0 0 -2 -2 2 2 0 0 0 -2 2 2 2 0 0 0 2 2 2 2 0 0 0 2 -2zm3 0a5 5 0 0 1 -5 5 5 5 0 0 1 -5 -5 5 5 0 0 1 5 -5 5 5 0 0 1 5 5zm-14-25h8v8h-8zm45 25a2 2 0 0 0 -2 -2 2 2 0 0 0 -2 2 2 2 0 0 0 2 2 2 2 0 0 0 2 -2zm3 0a5 5 0 0 1 -5 5 5 5 0 0 1 -5 -5 5 5 0 0 1 5 -5 5 5 0 0 1 5 5zm-38-31-3 3h-8l-1 1v10h-1v10h2v2h-2v6h6.0859a6 6 0 0 1 -0.0859 -1 6 6 0 0 1 6 -6 6 6 0 0 1 6 6 6 6 0 0 1 -0.08984 1h8.09v-1h7v1h7.0859a6 6 0 0 1 -0.086 -1 6 6 0 0 1 6 -6 6 6 0 0 1 6 6 6 6 0 0 1 -0.08984 1h2.09v-6h-1v-2h-3v-3h-12v3h-17v-2h3v-19h-1v-3h-10z"/>
+        </symbol>
+
+        <symbol id="svg-ets2-trailer" viewBox="0 0 105 39">
+            <path d="m95 34a2 2 0 0 0 -2 -2 2 2 0 0 0 -2 2 2 2 0 0 0 2 2 2 2 0 0 0 2 -2zm3 0a5 5 0 0 1 -5 5 5 5 0 0 1 -5 -5 5 5 0 0 1 5 -5 5 5 0 0 1 5 5zm-14 0a2 2 0 0 0 -2 -2 2 2 0 0 0 -2 2 2 2 0 0 0 2 2 2 2 0 0 0 2 -2zm3 0a5 5 0 0 1 -5 5 5 5 0 0 1 -5 -5 5 5 0 0 1 5 -5 5 5 0 0 1 5 5zm-14 0a2 2 0 0 0 -2 -2 2 2 0 0 0 -2 2 2 2 0 0 0 2 2 2 2 0 0 0 2 -2zm3 0a5 5 0 0 1 -5 5 5 5 0 0 1 -5 -5 5 5 0 0 1 5 -5 5 5 0 0 1 5 5zm-31-4h13v4h-13zm-43-30h101a2 2 0 0 1 2 2v26h-105v-26a2 2 0 0 1 2-2z"/>
+        </symbol>
+
+        <symbol id="svg-ats-truck" viewBox="0 0 73 40">
+            <path d="M15 34a3 3 0 0 0 -3 -3 3 3 0 0 0 -3 3 3 3 0 0 0 3 3 3 3 0 0 0 3 -3zm3 0a6 6 0 0 1 -6 6 6 6 0 0 1 -6 -6 6 6 0 0 1 6 -6 6 6 0 0 1 6 6zm47 0a3 3 0 0 0 -3 -3 3 3 0 0 0 -3 3 3 3 0 0 0 3 3 3 3 0 0 0 3 -3zm3 0a6 6 0 0 1 -6 6 6 6 0 0 1 -6 -6 6 6 0 0 1 6 -6 6 6 0 0 1 6 6zm-13-14h14v3h-14zM16 9h9v8h-9zm11 0h4v8h-4zM27,0l-4 4h-6l-2 2v11h-12v2h-1v10h-2v6h5.078a7 7 0 0 1 -0.078 -1 7 7 0 0 1 7 -7 7 7 0 0 1 7 7 7 7 0 0 1 -0.08 1h6.08v-2h11v2h19.078a7 7 0 0 1 -0.078 -1 7 7 0 0 1 7 -7 7 7 0 0 1 7 7 7 7 0 0 1 -0.08 1h2.08v1h2v-12h-2v1h-21v-1h-3v-24h-8v24h-1v-24z"/>
+        </symbol>
+
+        <symbol id="svg-ats-trailer" viewBox="0 0 114 43">
+            <path d="m104 38a2 2 0 0 0 -2 -2 2 2 0 0 0 -2 2 2 2 0 0 0 2 2 2 2 0 0 0 2 -2zm3 0a5 5 0 0 1 -5 5 5 5 0 0 1 -5 -5 5 5 0 0 1 5 -5 5 5 0 0 1 5 5zm-14 0a2 2 0 0 0 -2 -2 2 2 0 0 0 -2 2 2 2 0 0 0 2 2 2 2 0 0 0 2 -2zm3 0a5 5 0 0 1 -5 5 5 5 0 0 1 -5 -5 5 5 0 0 1 5 -5 5 5 0 0 1 5 5zm-42-4h21v4h-21zM2 0h110a2 2 0 0 1 2 2v30h-114v-30a2 2 0 0 1 2-2z"/>
+        </symbol>        
+        
+        <symbol id="svg-fuel" viewBox="0 0 512 512">
+            <g>
+                <path d="m304,96c0-8.837-7.163-16-16-16h-160c-8.837,0-16,7.163-16,16v128c0,8.837 7.163,16 16,16h160c8.837,0 16-7.163 16-16v-128zm-32,112h-128v-96h128v96z"/>
+                <path d="M487.538,113.453l-63.809-32c-7.922-3.969-17.42-0.742-21.373,7.156c-3.953,7.906-0.702,17.516,7.204,21.469l24.301,12.139   c-0.65,1.74-1.491,3.58-1.491,5.549c0,20.832,15.63,38.426,31.63,45.051v194.949c0,8.82-7.18,16-16,16s-16-7.18-16-16v-128   c0-38.631-32-70.949-64-78.383V63.766C368,28.477,340.053,0,304.764,0h-192C77.475,0,48,28.477,48,63.766v358.109l-23.156,11.578   c-5.422,2.711-8.844,8.25-8.844,14.313v48C16,504.602,23.928,512,32.764,512h352C393.6,512,400,504.602,400,495.766v-48   c0-6.063-3.422-11.602-8.844-14.313L368,421.875v-227.16c16,6.625,32,24.219,32,45.051v128c0,26.469,21.531,48,48,48   c26.469,0,48-21.531,48-48v-240C496,121.703,492.96,116.164,487.538,113.453z M368,480H48v-22.344l23.156-11.578   c5.422-2.711,8.844-8.25,8.844-14.313v-368C80,46.117,95.115,32,112.764,32h192C322.412,32,336,46.117,336,63.766v368   c0,6.063,3.422,11.602,8.844,14.313L368,457.656V480z"/>
+            </g>
+        </symbol>
+        
+        <symbol id="svg-sleep" viewbox="0 0 242 141">
+              <path id="Icon" class="cls-1" d="M237.139,0.155H221.12a4,4,0,0,0-4,4V42.382a15.867,15.867,0,0,0-8.009-2.224h-6.168a23.985,23.985,0,0,0-35.781-31.95q-0.176.2-.346,0.4a3.9,3.9,0,0,0-1.758-.448H88.962a47.2,47.2,0,0,0-41.281,24h-22.8v-4a4,4,0,0,0-4-4H4.861a4,4,0,0,0-4,4V136.162a4,4,0,0,0,4,4H20.88a4,4,0,0,0,4-4v-16h192.23v16a4,4,0,0,0,4,4h16.019a4,4,0,0,0,4-4V4.156A4,4,0,0,0,237.139.155Zm-52.062,8a16,16,0,1,1-16.019,16A16.01,16.01,0,0,1,185.077,8.156ZM169.058,42l0.268,0.24-0.268.144V42Zm8.009,6.16h32.039a8,8,0,1,1,0,16H177.067A8,8,0,1,1,177.067,48.158Zm-152.182-8h25.2a4.006,4.006,0,0,0,3.584-2.212A39.252,39.252,0,0,1,88.962,16.156h72.087v48H24.885v-24Zm0,32h192.23v16H24.885v-16Zm208.249,60h-8.009v-16a4,4,0,0,0-4-4H20.88a4,4,0,0,0-4,4v16H8.866V32.157h8.01v60a4,4,0,0,0,4,4H221.12a4,4,0,0,0,4-4v-84h8.009V132.162Z"/>
+        </symbol>
+
+    </defs>
+</svg>
+
+<div class="dashboard game-connected dark" id="theme">
+    
+<!-- Start Dashboard -->
+    <div id="dashboard">
+        <div class="flex-container">            
+
+        <!-- Start Current Speed -->
+            <div class="currentSpeed" id="speedCheck">
+                <div class="container">
+                    <div class="row">
+                        <div class="col s12">
+                            <span class="truck-speedRounded"></span>km/h
+                        </div><!-- /col s12 -->
+                    </div><!-- /row -->
+                </div><!-- /container -->
+            </div><!-- /currentSpeed -->
+        <!-- End Current Speed -->
+
+        <!-- Start Digital Meters -->
+            <div class="digitalMeters">
+                <div class="container">
+                    <div class="row">
+                        <div class="col s4 digitalMeterBox">
+                            <img src="skins/modern-telemetry-km/images/gear.svg" />
+                            <span class="truck-gear"></span>
+                        </div><!-- /col s4 digitalMeterBox -->
+                        <div class="col s4 digitalMeterBox">
+                            <img src="skins/modern-telemetry-km/images/cruisecontrol.svg" class="cruiseControlImage" id="meterBoxSpeed"/>
+                            <span class="truck-cruiseControlSpeed"></span>
+                        </div><!-- /col s4 digitalMeterBox --> 
+                        <div class="col s4 digitalMeterBox lastBorder">
+                            <img src="skins/modern-telemetry-km/images/speedlimit.svg" class="speedLimitImage" id="meterBoxSpeed" />
+                            <span class="navigation-speedLimit"></span>
+                        </div><!-- /col s4 digitalMeterBox lastBorder -->                    
+                    </div><!-- /row -->
+                </div><!-- /container -->                        
+            </div><!-- /digitalMeters -->
+        <!-- End Digital Meters -->
+
+        <!-- Start Tank Box -->
+            <div class="fillBox valign-wrapper" id="tank">
+                <div class="container">
+                    <div class="row">
+                        <div class="col s12 fillBoxContent ">
+                            <div class="fillingIcon fuel">
+                                <div class="warning"><svg width="45px" height="48px"><use xlink:href="#svg-fuel" fill="#FF0000"/></svg></div>                                  
+                                <div class="top"><svg width="45px" height="48px"><use xlink:href="#svg-fuel" fill="#000"/></svg></div>
+                                <div class="bot"><svg width="45px" height="48px"><use xlink:href="#svg-fuel" fill="#F3C24C"/></svg></div>  
+                            </div><!-- /fillingIcon fuel -->
+                            <div class="fillBoxText">
+                                <span class="truck-fuelCapacity"></span> KM LEFT
+                            </div><!-- /fillBoxText -->
+                        </div><!-- /col s12 fillBoxContent -->
+                    </div><!-- /row -->
+                </div><!-- /container -->    
+            </div><!-- /fillBox valign-wrapper -->
+        <!-- End Tank Box -->
+
+        <!-- Start Sleep Box -->
+            <div class="fillBox valign-wrapper" id="sleep">
+                <div class="container">
+                    <div class="row">
+                        <div class="col s12 fillBoxContent">
+                            <div class="fillingIcon rest">
+                                <div class="warning"><svg width="82px" height="48px"><use xlink:href="#svg-sleep" fill="#FF0000"/></svg></div>
+                                <div class="top"><svg width="82px" height="48px"><use xlink:href="#svg-sleep" fill="#000"/></svg></div>
+                                <div class="bot"><svg width="82px" height="48px"><use xlink:href="#svg-sleep" fill="#1E88E5"/></svg></div>  
+                            </div><!-- /fillingIcon fuel -->
+                            <div class="fillBoxText">
+                                <span id="hours"></span> and <span id="minutes"></span>
+                            </div><!-- /fillBoxText -->
+                        </div><!-- /col s12 fillBoxContent -->
+                    </div><!-- /row -->
+                </div><!-- /container -->    
+            </div><!-- /fillBox valign-wrapper -->
+        <!-- End Sleep Box -->        
+        
+        </div><!-- /flex-container -->
+    </div><!-- /dashboard -->
+<!-- End Dashboard -->
+    
+<!-- Start Job Info -->
+    <div id="job-info">
+        <div class="flex-container">    
+            
+        <!-- Start No Job -->
+            <div class="noJob valign-wrapper">
+                <div class="noJob-container">
+                    <img src="skins/modern-telemetry-km/images/no-job.svg" />
+                    No job info found
+                </div>
+            </div><!-- /noJob -->
+        <!-- End No Job -->
+            
+        <!-- Start Has Job -->
+            <div class="hasJob flex-container">
+                
+            <!-- Start Header -->
+                <div class="hasJobHeader">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col s12">
+                                Job info
+                            </div><!-- /col s12 -->
+                        </div><!-- /row -->
+                    </div><!-- /container -->
+                </div><!-- /hasJobHeader -->
+            <!-- End Header -->                
+                
+            <!-- Start Cargo Box -->
+                <div class="BoxContainer valign-wrapper">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col s12">
+                                <span class="BoxHeader">Cargo</span>
+                                <div class="BoxContent">
+                                    <span class="trailer-name"></span> (<span class="trailer-mass"></span>)
+                                </div><!-- /BoxContent -->
+                            </div><!-- /col s12 -->
+                        </div><!-- /row -->
+                    </div><!-- /container -->
+                </div><!-- /BoxContainer valign-wrapper -->
+            <!-- End Cargo Box -->
+                
+            <!-- Start From To Box -->
+                <div class="BoxContainer valign-wrapper">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col s12">
+                                <span class="BoxHeader">From<img src="skins/modern-telemetry-km/images/arrow.svg" /> To</span>
+                                <div class="BoxContent">
+                                    <div>
+                                        <span class="job-sourceCity"></span> - <span class="job-sourceCompany"></span>
+                                    </div>
+                                    <div>
+                                        <span class="job-destinationCity"></span> - <span class="job-destinationCompany"></span>
+                                    </div>
+                                </div><!-- /BoxContent -->
+                            </div><!-- /col s12 -->
+                        </div><!-- /row -->
+                    </div><!-- /container -->
+                </div><!-- /BoxContainer valign-wrapper -->
+            <!-- End From To Box -->
+                
+            <!-- Start Income Box -->
+                <div class="BoxContainer valign-wrapper">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col s12">
+                                <span class="BoxHeader">Income</span>
+                                <div class="BoxContent">
+                                    <span id="currency"></span><span class="job-income"></span>,-
+                                </div><!-- /BoxContent -->
+                            </div><!-- /col s12 -->
+                        </div><!-- /row -->
+                    </div><!-- /container -->
+                </div><!-- /BoxContainer valign-wrapper -->
+            <!-- End Income Box -->
+                
+            <!-- Start ETA Box -->
+                <div class="BoxContainer valign-wrapper">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col s12">
+                                <span class="BoxHeader">ETA</span>
+                                <div class="BoxContent">
+                                    <span class="navigation-estimatedDistance etaLine"></span>
+                                    <span id="hour"></span> and <span id="minute"></span>
+                                </div><!-- /BoxContent -->
+                            </div><!-- /col s12 -->
+                        </div><!-- /row -->
+                    </div><!-- /container -->
+                </div><!-- /BoxContainer valign-wrapper -->
+            <!-- End ETA Box -->          
+                
+            <!-- Start Time Left Box -->
+                <div class="BoxContainer valign-wrapper lastBox" id="timeLeftWarning">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col s12">
+                                <span class="BoxHeader">TIME LEFT</span>
+                                <div class="BoxContent">
+                                    <span id="remainingHour"></span> and <span id="remainingMinute"></span>
+                                </div><!-- /BoxContent -->
+                            </div><!-- /col s12 -->
+                        </div><!-- /row -->
+                    </div><!-- /container -->
+                </div><!-- /BoxContainer valign-wrapper lastBox -->
+            <!-- End Time Left Box -->                          
+                
+            </div><!-- /hasJob flex-container -->
+        <!-- End No Job -->
+            
+        </div><!-- /flex-container -->
+    </div><!-- /job-info -->
+<!-- End Job Info -->    
+    
+<!-- Start Truck Status -->
+    <div id="truck-status">
+        <div class="flex-container">
+        
+        <!-- Start Header -->
+            <div class="truckStatusHeader">
+                <div class="container">
+                    <div class="row">
+                        <div class="col s12">
+                            Truck Status
+                        </div><!-- /col s12 -->
+                    </div><!-- /row -->
+                </div><!-- /container -->
+            </div><!-- /truckStatusHeader -->
+        <!-- End Header -->                            
+            
+        <!-- Start Truck Damage -->
+            <div class="BoxContainer valign-wrapper">
+                <div class="container">
+                    <div class="row">
+                        <div class="col s12 damageIcon">
+                            <div class="fillingIcon truckDamage">
+                                <div class="top isEts2"><svg width="127px" height="86px"><use xlink:href="#svg-ets2-truck" fill="#000"/></svg></div>
+                                <div class="bot isEts2"><svg width="127px" height="86px"><use xlink:href="#svg-ets2-truck" fill="#FF0000"/></svg></div>
+                                <div class="top isAts"><svg width="127" height="70px"><use xlink:href="#svg-ats-truck" fill="#000"/></svg></div>
+                                <div class="bot isAts"><svg width="127px" height="70px"><use xlink:href="#svg-ats-truck" fill="#FF0000"/></svg></div>
+                            </div><!-- /fillingIcon truckDamage -->
+                            <div class="BoxContent">
+                                <span id="truckDamage"></span>
+                            </div><!-- /BoxContent -->
+                        </div><!-- /col s12 damageIcon -->
+                    </div><!-- /row -->
+                </div><!-- /container -->
+            </div><!-- /BoxContainer valign-wrapper -->
+        <!-- End Truck Damage -->            
+            
+        <!-- Start Trailer Damage -->
+            <div class="BoxContainer valign-wrapper lastBox">
+                <div class="container">
+                    <div class="row">
+                        <div class="col s12 damageIcon">
+                            <div class="fillingIcon trailerDamage">
+                                <div class="top isEts2"><svg width="127px" height="48px"><use xlink:href="#svg-ets2-trailer" fill="#000"/></svg></div>
+                                <div class="bot isEts2"><svg width="127px" height="48px"><use xlink:href="#svg-ets2-trailer" fill="#FF0000"/></svg></div>
+                                <div class="top isAts"><svg width="127" height="48px"><use xlink:href="#svg-ats-trailer" fill="#000"/></svg></div>
+                                <div class="bot isAts"><svg width="127px" height="48px"><use xlink:href="#svg-ats-trailer" fill="#FF0000"/></svg></div>
+                            </div><!-- /fillingIcon trailerDamage -->
+                            <div class="BoxContent">
+                                <span id="trailerDamage"></span>
+                            </div><!-- /BoxContent -->
+                        </div><!-- /col s12 damageIcon -->
+                    </div><!-- /row -->
+                </div><!-- /container -->
+            </div><!-- /BoxContainer valign-wrapper lastBox -->
+        <!-- End Trailer Damage -->                        
+            
+        </div><!-- /flex-container -->
+    </div><!-- /truck-status -->
+<!-- End Truck Status -->
+    
+<!-- Start Bottom Navigation -->
+<div class="bottom-nav">
+    <div class="container">
+        <div class="row">
+            <ul class="tabs col s12">
+                <li class="tab col s4"><a class="active" href="#dashboard"><i class="icon-dashboard"></i>Dashboard</a></li>
+                <li class="tab col s4"><a href="#job-info"><i class="icon-job-info"></i>Job Info</a></li>
+                <li class="tab col s4"><a href="#truck-status"><i class="icon-truck-status"></i>Truck Status</a></li>
+            </ul>
+        </div><!-- /row -->
+    </div><!-- /container -->
+</div><!-- /bottom-nav -->
+<!-- End Bottom Navigation -->
+  
+    
+</div><!-- /dashboard game-connected -->
