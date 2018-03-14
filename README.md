@@ -16,11 +16,3 @@ This repository contains a skin which you can use with this Telemetry program cr
 4. Open the telemetry server.exe from Funbit and click the HTML5 App URL.
 5. Scroll down till you see the Modern Telemetry (KM/H) and open it.
 6. That's it! Enjoy!
-
-
-    Download bundle by clicking Download ZIP button at the right side of this page.
-    Unpack downloaded ZIP file anywhere you want.
-    Run server\Ets2Telemetry.exe
-    Click "Install" button to perform the installation
-    When installation finishes click "OK", select your network interface and click "HTML5 App URL" link to open your dashboard
-    Done (now you may read Usage topic to understand how to use the server)
