@@ -24,8 +24,6 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data, utils) {
     // before it is displayed on the dashboard.
     // You may convert km/h to mph, kilograms to tons, etc.
 
-
-    
     // round truck speed
     data.truck.speedRounded = Math.abs(data.truck.speed > 0
         ? Math.floor(data.truck.speed)
@@ -37,24 +35,217 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data, utils) {
     var timeDate = new Date(data.game.time);
     var gameHour = timeDate.getUTCHours();
     var theme = document.getElementById("theme");
+    
     if (gameHour >= 6 && gameHour <= 17) {
         theme.classList.remove("dark");
     } else {
         theme.classList.add("dark");
     }
     
-    // convert kilometers per hour to miles per hour
-    data.truck.speedMph = data.truck.speed * 0.621371;
-    // convert kg to t
-    data.trailer.mass = (data.trailer.mass / 1000.0) + 't';
-    // format odometer data as: 00000.0
-    data.truck.odometer = utils.formatFloat(data.truck.odometer, 1);
     // convert gear to readable format
     data.truck.gear = data.truck.gear > 0 ? 'D' + data.truck.gear : (data.truck.gear < 0 ? 'R' : 'N');
-    // convert rpm to rpm * 100
-    data.truck.engineRpm = data.truck.engineRpm / 100;
+    // Round Distance Left
+    data.navigation.estimatedDistance = Math.floor(data.navigation.estimatedDistance / 1000);  
     
-    // Process DOM for job
+    // Text to go with the new date format
+    var hoursString = " Hours ";
+    var hourString = " Hour ";    
+    var minutesString = " Minutes "
+    var minuteString = " Minute "
+    
+    // NextRestStopTime in a new date format
+    var nextRestStop = new Date (data.game.nextRestStopTime);
+    var nextRestStopDay = nextRestStop.getUTCDay();
+    var nextRestStopHour = nextRestStop.getUTCHours();
+    var nextRestStopMinute = nextRestStop.getUTCMinutes();
+    var nextRestStopTotal = (nextRestStopDay - 1) * 24 + nextRestStopHour;    
+    
+    // EstimatedTime in a new date format
+    var estimatedTime = new Date (data.navigation.estimatedTime);
+    var estimatedTimeDay = estimatedTime.getUTCDay();
+    var estimatedTimeHour = estimatedTime.getUTCHours();
+    var estimatedTimeMinute = estimatedTime.getUTCMinutes();
+    var estimatedTimeTotal = (estimatedTimeDay - 1) * 24 + estimatedTimeHour;         
+    
+    // remainingTime in a new date format
+    var remainingTime = new Date (data.job.remainingTime);
+    var remainingTimeDay = remainingTime.getUTCDay();
+    var remainingTimeHour = remainingTime.getUTCHours();
+    var remainingTimeMinute = remainingTime.getUTCMinutes();
+    var remainingTimeTotal = (remainingTimeDay - 1) * 24 + remainingTimeHour;         
+        
+    
+    // Output the variables into the NextRestStopTime Data object
+    document.getElementById("nextRestStopHour").innerHTML = nextRestStopTotal  + hoursString;
+    document.getElementById("nextRestStopMinute").innerHTML = nextRestStopMinute  + minutesString;
+    
+    // Output the variables into the EstimatedTime Data object
+    document.getElementById("estimatedTimeHour").innerHTML = estimatedTimeTotal  + hoursString;
+    document.getElementById("estimatedTimeMinute").innerHTML = estimatedTimeMinute  + minutesString;    
+    
+    // Output the variables into the RemainingTime Data object
+    document.getElementById("remainingTimeHour").innerHTML = remainingTimeTotal  + hoursString;
+    document.getElementById("remainingTimeMinute").innerHTML = remainingTimeMinute  + minutesString;        
+    
+    // Conditional statements to replace nextRestStop Hours and Minutes to Hour and Minute if equal to 1
+    if (nextRestStopTotal == 1) {
+        document.getElementById("nextRestStopHour").innerHTML = nextRestStopTotal  + hourString;
+    }
+    if (nextRestStopMinute == 1) {
+        document.getElementById("nextRestStopMinute").innerHTML = nextRestStopMinute  + minuteString;
+    }                
+    
+    // Conditional statements to replace estimatedTime Hours and Minutes to Hour and Minute if equal to 1
+    if (estimatedTimeTotal == 1) {
+        document.getElementById("estimatedTimeHour").innerHTML = estimatedTimeTotal  + hourString;
+    }
+    if (estimatedTimeMinute == 1) {
+        document.getElementById("estimatedTimeMinute").innerHTML = estimatedTimeMinute  + minuteString;
+    }                 
+    
+    // Conditional statements to replace remainingTime Hours and Minutes to Hour and Minute if equal to 1
+    if (remainingTimeTotal == 1) {
+        document.getElementById("remainingTimeHour").innerHTML = remainingTimeTotal  + hourString;
+    }
+    if (remainingTimeMinute == 1) {
+        document.getElementById("remainingTimeMinute").innerHTML = remainingTimeMinute  + minuteString;
+    }          
+    
+    // Detect what game is running and hide the class that is not needed.
+    if (data.game.gameName == 'ETS2') {
+        
+        // Hide the class isAts when playing ETS
+        $('.isAts').hide();
+        $('.isEts2').show();
+
+        // Convert KG to T
+        data.trailer.mass = (data.trailer.mass / 1000.0) + 't';        
+        
+        // Fill the tank icon to the current percentage
+        data.currentFuelPercentage = (data.truck.fuel / data.truck.fuelCapacity) * 100;
+        $('.fillingIcon.fuel .top').css('height', (100 - data.currentFuelPercentage) + '%');
+    
+        // Make the tank text and icon red when below 300 KM left or remove it when not
+        if (data.truck.fuelCapacity <= 300) {
+            document.getElementById("tank").classList.add("red-text");
+            $('.fillingIcon.fuel .warning').css('height', (100) + '%');
+        } else {
+            document.getElementById("tank").classList.remove("red-text");
+            $('.fillingIcon.fuel .warning').css('height', (0) + '%');
+        }             
+        
+        // Make the speed box on the Dashboard red when going above the speedlimit
+        var speedCheckBox = document.getElementById("speedCheck");
+    
+        if (data.truck.speed > data.navigation.speedLimit) {
+            speedCheckBox.classList.add("red-gradient");
+        } else {
+            speedCheckBox.classList.remove("red-gradient");
+        }
+
+        // Make the speed bar red disappear when there is no speed limit and make it disappear
+        // when it matches the speed
+        if (data.navigation.speedLimit == 0) {
+            speedCheckBox.classList.remove("red-gradient");
+        }        
+
+        if (data.truck.speed == data.navigation.speedLimit) {
+            speedCheckBox.classList.remove("red-gradient");
+        }                
+        
+        // Fill the sleep icon to the current percentage
+        var sleepHourInMinutes = (nextRestStopTotal * 60);
+        var sleepTotalInMinutes = (sleepHourInMinutes + nextRestStopMinute);
+        var sleepTotal = (sleepTotalInMinutes / 840);
+        $('.fillingIcon.rest .top').css('height', (sleepTotal * 100 ) + '%');
+
+        // Make the sleep text and icon red when below 2 hours left or remove it when not
+        if (sleepTotalInMinutes <= 120) {
+            document.getElementById("sleep").classList.add("red-text");
+            $('.fillingIcon.rest .warning').css('height', (100) + '%');
+            $('.fillingIcon.rest .top').css('height', (0) + '%');
+        } else {
+            document.getElementById("sleep").classList.remove("red-text");
+            $('.fillingIcon.rest .warning').css('height', (0) + '%');
+        }            
+                
+        
+    } else {
+        
+        // Hide the class isEts2 when playing ATS
+        $('.isEts2').hide();
+        $('.isAts').show();
+        
+        // Convert kilometers per hour to miles per hour
+        data.truck.speedMph = data.truck.speed * 0.621371;        
+        
+        // Convert the speedlimit to miles per hour
+        data.navigation.speedLimit = Math.floor(data.navigation.speedLimit * 0.621371);
+        
+        // Convert the estimated distance to destination to miles
+        data.navigation.estimatedDistance = data.navigation.estimatedDistance * 0.621371;
+        
+        // Convert Cruise Control to MPH
+        data.truck.cruiseControlSpeed = data.truck.cruiseControlSpeed * 0.621371;
+        
+        // Convert liters to gallons
+        data.truck.fuel = data.truck.fuel * 0.264172052;
+        data.truck.fuelCapacity = data.truck.fuelCapacity * 0.264172052;
+
+        // Convert T to LBS
+        data.trailer.mass = Math.round(data.trailer.mass * 2.204623) + ' lbs';                
+
+        // Fill the tank icon to the current percentage
+        data.currentFuelPercentage = (data.truck.fuel / data.truck.fuelCapacity) * 100;
+        $('.fillingIcon.fuel .top').css('height', (100 - data.currentFuelPercentage) + '%');
+    
+        // Make the tank text and icon red when below 300 Miles left or remove it when not
+        if (data.truck.fuelCapacity <= 186) {
+            document.getElementById("tank").classList.add("red-text");
+            $('.fillingIcon.fuel .warning').css('height', (100) + '%');
+        } else {
+            document.getElementById("tank").classList.remove("red-text");
+            $('.fillingIcon.fuel .warning').css('height', (0) + '%');
+        }        
+
+        // Make the speed box on the Dashboard red when going above the speedlimit
+        var speedCheckBoxMph = document.getElementById("speedCheck");
+    
+        if (data.truck.speedMph > data.navigation.speedLimit) {
+            speedCheckBoxMph.classList.add("red-gradient");
+        } else {
+            speedCheckBoxMph.classList.remove("red-gradient");
+        }
+
+        // Make the speed bar red disappear when there is no speed limit and make it disappear
+        // when it matches the speed
+        if (data.navigation.speedLimit == 0) {
+            speedCheckBoxMph.classList.remove("red-gradient");
+        }        
+
+        if (data.truck.speedMph == data.navigation.speedLimit) {
+            speedCheckBoxMph.classList.remove("red-gradient");
+        }                    
+        
+        // Fill the sleep icon to the current percentage
+        var sleepHourInMinutes = (nextRestStopTotal * 60);
+        var sleepTotalInMinutes = (sleepHourInMinutes + nextRestStopMinute);
+        var sleepTotal = (sleepTotalInMinutes / 660);
+        $('.fillingIcon.rest .top').css('height', (sleepTotal * 100 ) + '%');
+
+        // Make the sleep text and icon red when below 2 hours left or remove it when not
+        if (sleepTotalInMinutes <= 120) {
+            document.getElementById("sleep").classList.add("red-text");
+            $('.fillingIcon.rest .warning').css('height', (100) + '%');
+            $('.fillingIcon.rest .top').css('height', (0) + '%');
+        } else {
+            document.getElementById("sleep").classList.remove("red-text");
+            $('.fillingIcon.rest .warning').css('height', (0) + '%');
+        }            
+        
+        }    
+    
+    // Hide hasJob when there is no job and the other way around.
     if (data.trailer.attached) {
         $('.hasJob').show();
         $('.noJob').hide();
@@ -63,128 +254,29 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data, utils) {
         $('.noJob').show();
     }    
     
-    // Round Distance Left
-    data.navigation.estimatedDistance = Math.floor(data.navigation.estimatedDistance/1000) + " KM";    
-    
-    // Convert string to readable time format
-    var timeLeftDate = new Date(data.job.remainingTime);
-    var remainingDay = timeLeftDate.getUTCDay();
-    var remainingHour = timeLeftDate.getUTCHours();
-    var remainingMinute = timeLeftDate.getUTCMinutes();
-    var remainingTotal = (remainingDay-1) * 24 + remainingHour;
-    data.job.remainingTime = document.getElementById("remainingHour").innerHTML = remainingTotal + " hours ";
-    data.job.remainingTime = document.getElementById("remainingMinute").innerHTML = remainingMinute + " minutes ";        
-    
-    // Convert string to readable time format
-    var estimatedTimeDate = new Date(data.navigation.estimatedTime);
-    var day = estimatedTimeDate.getUTCDay();
-    var hour = estimatedTimeDate.getUTCHours();
-    var minute = estimatedTimeDate.getUTCMinutes();
-    var totalEstimated = (day-1) * 24 + hour;
-    data.navigation.estimatedTime = document.getElementById("hour").innerHTML = totalEstimated + " hours ";
-    data.navigation.estimatedTime = document.getElementById("minute").innerHTML = minute + " minutes ";    
-    
-    // Convert string to readable time format
-    var nextRestStopTimeDate = new Date(data.game.nextRestStopTime);
-    var hours = nextRestStopTimeDate.getUTCHours();
-    var minutes = nextRestStopTimeDate.getUTCMinutes();
-    data.game.nextRestStopTime = document.getElementById("hours").innerHTML = hours + " hours ";
-    data.game.nextRestStopTime = document.getElementById("minutes").innerHTML = minutes + " minutes ";
-    
-    // Change hours text to hour when on 1 hour left
-    if (hours == 1) {
-        data.game.nextRestStopTime = document.getElementById("hours").innerHTML = hours + " hour ";
-  
-    }
-    
-    if (hour == 1) {
-        data.navigation.estimatedTime = document.getElementById("hour").innerHTML = hour + " hour ";
-    }
-    
-    if (remainingTotal == 1) {
-        data.job.remainingTime = document.getElementById("remainingHour").innerHTML = remainingTotal + " hour ";       
-    }
-
-    if (minutes == 1) {
-        data.game.nextRestStopTime = document.getElementById("minutes").innerHTML = minutes + " minute ";
-    }        
-    
-    if (minute == 1) {
-        data.navigation.estimatedTime = document.getElementById("minute").innerHTML = minute + "  minute ";
-    }
-    
-    if (remainingMinute == 1) {
-        data.job.remainingTime = document.getElementById("remainingMinute").innerHTML = remainingMinute + " minute ";        
-    }
-    
-    var b = document.getElementById("timeLeftWarning");
-    if (remainingTotal < 3) {
-        b.classList.add("red-text");
+    // Make the text red when there is 3 hours left to complete the job
+    var timeLeftWarning = document.getElementById("timeLeftWarning");
+    if (remainingTimeTotal < 3) {
+        timeLeftWarning.classList.add("red-text");
     } else {
-        b.classList.remove("red-text")
-    }
-        
-    
-    // Fill the tank icon to the current percentage
-    data.currentFuelPercentage = (data.truck.fuel / data.truck.fuelCapacity) * 100;
-    $('.fillingIcon.fuel .top').css('height', (100 - data.currentFuelPercentage) + '%');
-    
-    // Make the tank text and icon red when below 300KM left or remove it when not
-    if (data.truck.fuel <= 300) {
-        document.getElementById("tank").classList.add("red-text");
-        $('.fillingIcon.fuel .warning').css('height', (100) + '%');
-    } else {
-        document.getElementById("tank").classList.remove("red-text");
-        $('.fillingIcon.fuel .warning').css('height', (0) + '%');
-    }
-    
-    // FIll the sleep icon to the current percentage
-    var sleepHourInMinutes = (hours * 60);
-    var sleepTotalInMinutes = (sleepHourInMinutes + minutes);
-    var sleepTotal = (sleepTotalInMinutes / 660);
-    $('.fillingIcon.rest .top').css('height', (sleepTotal * 100 ) + '%');
-    
-    // Make the sleep text and icon red when below 2 hours left or remove it when not
-    if (sleepTotalInMinutes <= 120) {
-        document.getElementById("sleep").classList.add("red-text");
-        $('.fillingIcon.rest .warning').css('height', (100) + '%');
-        $('.fillingIcon.rest .top').css('height', (0) + '%');
-    } else {
-        document.getElementById("sleep").classList.remove("red-text");
-        $('.fillingIcon.rest .warning').css('height', (0) + '%');
+        timeLeftWarning.classList.remove("red-text")
     }    
     
-    // Detect the running game
-
-    if (data.game.gameName == 'ETS2') {
-        $('.isAts').hide();
-        $('.isEts2').show();
-    } else {
-        $('.isEts2').hide();
-        $('.isAts').show();
-    }
-    
-    if (data.game.gameName == 'ATS') {
-        document.getElementById("currency").innerHTML = '$ ';
-    } else {
-        document.getElementById("currency").innerHTML = '&euro; ';
-    }
-    
-    // Calculate the percentage of damage
-    
+    // Return the max value of all damage percentages.
     function getDamagePercentage(data) {
-        // Return the max value of all damage percentages.
         return Math.max(data.truck.wearEngine,
                         data.truck.wearTransmission,
                         data.truck.wearCabin,
                         data.truck.wearChassis,
                         data.truck.wearWheels) * 100;
     }        
-    
+
+    // Calculate the percentage of damage and adjust the height of the colored SVG
     data.scsTruckDamage = getDamagePercentage(data);
     $('.fillingIcon.truckDamage .top').css('height', (100 - data.scsTruckDamage) + '%');
     $('.fillingIcon.trailerDamage .top').css('height', (100 - data.trailer.wear * 100) + '%');    
 
+    // Get the total damage of the truck in percent and show it on the truck status page
     var totalTruckPercent = 100 - (100- data.scsTruckDamage);
     var TotalTruckPercentRound = Math.floor(totalTruckPercent);
     if (data.scsTruckDamage >= 1) {
@@ -193,6 +285,7 @@ Funbit.Ets.Telemetry.Dashboard.prototype.filter = function (data, utils) {
         document.getElementById("truckDamage").innerHTML = '0%';
     }
     
+    // Get the total damage of the trailer in percent and show it on the truck status page
     var trailerDamageWear = Math.floor(data.trailer.wear * 100) + '%';
     if (trailerDamageWear >= 1 + '%') {
         document.getElementById("trailerDamage").innerHTML = trailerDamageWear;
@@ -211,27 +304,6 @@ Funbit.Ets.Telemetry.Dashboard.prototype.render = function (data, utils) {
     //
     
     // data - same data object as in the filter function
-    
-    // Make Kilometer box on the Dashboard red when going above the designated speedlimit
-    var d = document.getElementById("speedCheck");
-    data.navigation.speedLimit = data.navigation.speedLimit + 1;
-    if (data.truck.speed > data.navigation.speedLimit) {
-        d.classList.add("red-gradient");
-    } else {
-        d.classList.remove("red-gradient");
-    }
-    
-    // Make the speed bar red disappear when there is no speed limit and make it disappear
-    // when it matches the speed
-    var a = document.getElementById("speedCheck");
-    if (data.navigation.speedLimit == 0) {
-        a.classList.remove("red-gradient");
-    }        
-    
-    var b = document.getElementById("speedCheck")
-    if (data.truck.speed == data.navigation.speedLimit) {
-        b.classList.remove("red-gradient");
-    }
 
     // we don't have anything custom to render in this skin,
     // but you may use jQuery here to update DOM or CSS

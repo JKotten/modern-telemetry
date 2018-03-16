@@ -1,4 +1,4 @@
-﻿<script src="skins/modern-telemetry-km/js/materialize.min.js"></script>
+﻿<script src="skins/modern-telemetry/js/materialize.min.js"></script>
 <svg style="display: none">
     <defs>
         
@@ -43,7 +43,8 @@
                 <div class="container">
                     <div class="row">
                         <div class="col s12">
-                            <span class="truck-speedRounded"></span>km/h
+                            <span class="truck-speedRounded isEts2"></span><span class="isEts2">KM/H</span>
+                            <span class="truck-speedMph isAts"></span><span class="isAts">MPH</span>
                         </div><!-- /col s12 -->
                     </div><!-- /row -->
                 </div><!-- /container -->
@@ -55,15 +56,15 @@
                 <div class="container">
                     <div class="row">
                         <div class="col s4 digitalMeterBox">
-                            <img src="skins/modern-telemetry-km/images/gear.svg" />
+                            <img src="skins/modern-telemetry/images/gear.svg" />
                             <span class="truck-gear"></span>
                         </div><!-- /col s4 digitalMeterBox -->
                         <div class="col s4 digitalMeterBox">
-                            <img src="skins/modern-telemetry-km/images/cruisecontrol.svg" class="cruiseControlImage" id="meterBoxSpeed"/>
+                            <img src="skins/modern-telemetry/images/cruisecontrol.svg" class="cruiseControlImage" id="meterBoxSpeed"/>
                             <span class="truck-cruiseControlSpeed"></span>
                         </div><!-- /col s4 digitalMeterBox --> 
                         <div class="col s4 digitalMeterBox lastBorder">
-                            <img src="skins/modern-telemetry-km/images/speedlimit.svg" class="speedLimitImage" id="meterBoxSpeed" />
+                            <img src="skins/modern-telemetry/images/speedlimit.svg" class="speedLimitImage" id="meterBoxSpeed" />
                             <span class="navigation-speedLimit"></span>
                         </div><!-- /col s4 digitalMeterBox lastBorder -->                    
                     </div><!-- /row -->
@@ -82,7 +83,7 @@
                                 <div class="bot"><svg width="45px" height="48px"><use xlink:href="#svg-fuel" fill="#F3C24C"/></svg></div>  
                             </div><!-- /fillingIcon fuel -->
                             <div class="fillBoxText">
-                                <span class="truck-fuelCapacity"></span> KM LEFT
+                                <span class="truck-fuel"></span> / <span class="truck-fuelCapacity"></span><span class="isEts2"> LITERS</span><span class="isAts"> GALLONS</span>
                             </div><!-- /fillBoxText -->
                         </div><!-- /col s12 fillBoxContent -->
                     </div><!-- /row -->
@@ -101,7 +102,7 @@
                                 <div class="bot"><svg width="82px" height="48px"><use xlink:href="#svg-sleep" fill="#1E88E5"/></svg></div>  
                             </div><!-- /fillingIcon fuel -->
                             <div class="fillBoxText">
-                                <span id="hours"></span> and <span id="minutes"></span>
+                                <span id="nextRestStopHour"></span> and <span id="nextRestStopMinute"></span>
                             </div><!-- /fillBoxText -->
                         </div><!-- /col s12 fillBoxContent -->
                     </div><!-- /row -->
@@ -120,7 +121,7 @@
         <!-- Start No Job -->
             <div class="noJob valign-wrapper">
                 <div class="noJob-container">
-                    <img src="skins/modern-telemetry-km/images/no-job.svg" />
+                    <img src="skins/modern-telemetry/images/no-job.svg" />
                     No job info found
                 </div>
             </div><!-- /noJob -->
@@ -161,7 +162,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col s12">
-                                <span class="BoxHeader">From<img src="skins/modern-telemetry-km/images/arrow.svg" /> To</span>
+                                <span class="BoxHeader">From<img src="skins/modern-telemetry/images/arrow.svg" /> To</span>
                                 <div class="BoxContent">
                                     <div>
                                         <span class="job-sourceCity"></span> - <span class="job-sourceCompany"></span>
@@ -183,7 +184,7 @@
                             <div class="col s12">
                                 <span class="BoxHeader">Income</span>
                                 <div class="BoxContent">
-                                    <span id="currency"></span><span class="job-income"></span>,-
+                                    <span class="isEts2">&euro; </span><span class="isAts">&#36;</span><span class="job-income"></span>,-
                                 </div><!-- /BoxContent -->
                             </div><!-- /col s12 -->
                         </div><!-- /row -->
@@ -198,8 +199,9 @@
                             <div class="col s12">
                                 <span class="BoxHeader">ETA</span>
                                 <div class="BoxContent">
-                                    <span class="navigation-estimatedDistance etaLine"></span>
-                                    <span id="hour"></span> and <span id="minute"></span>
+                                    <span class="navigation-estimatedDistance etaLine"></span><span class="isEts2"> KM</span><span class="isAts"> MILES</span>
+                                    <br />
+                                    <span id="estimatedTimeHour"></span> and <span id="estimatedTimeMinute"></span>
                                 </div><!-- /BoxContent -->
                             </div><!-- /col s12 -->
                         </div><!-- /row -->
@@ -214,7 +216,7 @@
                             <div class="col s12">
                                 <span class="BoxHeader">TIME LEFT</span>
                                 <div class="BoxContent">
-                                    <span id="remainingHour"></span> and <span id="remainingMinute"></span>
+                                    <span id="remainingTimeHour"></span> and <span id="remainingTimeMinute"></span>
                                 </div><!-- /BoxContent -->
                             </div><!-- /col s12 -->
                         </div><!-- /row -->

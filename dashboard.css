@@ -26,8 +26,6 @@
 *           CH01 - Import           *
 ======================*/
 
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:300,700');
-
 @import url('css/materialize.min.css');
 
 
@@ -40,6 +38,24 @@
 
 
 /*      BODY        */
+
+@font-face {
+    font-family: 'open_sansbold';
+    src: url('opensans-bold-webfont.woff2') format('woff2'),
+         url('opensans-bold-webfont.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'open_sanslight';
+    src: url('opensans-light-webfont.woff2') format('woff2'),
+         url('opensans-light-webfont.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+
+}
 
 body {
     font-family: 'Open Sans';
@@ -190,7 +206,8 @@ body {
     background: linear-gradient(#EF473A, #CB2D3E) !important;
 }
 
-.truck-speedRounded {
+.truck-speedRounded,
+.truck-speedMph {
     font-size: 6.667REM;
 }
 
@@ -243,6 +260,10 @@ body {
     width: auto;
     display: block;
     margin: 0 auto 15px auto;
+}
+
+#km-m-left {
+    text-transform: uppercase;
 }
 
 #sleep {
@@ -313,10 +334,6 @@ body {
     font-weight: 300;
     margin-top: 10px;
     text-transform: uppercase;
-}
-
-.etaLine {
-    display: block;
 }
 
 .lastBox {

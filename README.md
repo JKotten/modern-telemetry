@@ -16,3 +16,9 @@ This repository contains a skin which you can use with this Telemetry program cr
 4. Open the telemetry server.exe from Funbit and click the HTML5 App URL.
 5. Scroll down till you see the Modern Telemetry (KM/H) and open it.
 6. That's it! Enjoy!
+
+## CHANGELOG
+
+* Rewrote the Dashboard.JS file
+* Added support for ATS (KMH to MPH), (Liters to Gallons) ETC.
+* Made the font local so you don't need to be connect to the internet the entire time.
